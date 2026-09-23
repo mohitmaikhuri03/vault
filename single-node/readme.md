@@ -66,6 +66,12 @@ Since it's self-signed, your browser/CLI will warn about an untrusted cert — t
 
 ## 5. Configure Vault (`vault.hcl`)
 
+
+```bash
+sudo mkdir -p /etc/vault.d
+sudo chown -R vault:vault /etc/vault.d
+```
+
 ```bash
 sudo tee /etc/vault.d/vault.hcl > /dev/null << 'EOF'
 ui = true
@@ -89,10 +95,7 @@ EOF
 
 > `disable_mlock = true` is only needed if you're on a VM without the ability to lock memory (common in some virtualized/containerized setups). Remove it and instead run `sudo setcap cap_ipc_lock=+ep $(readlink -f $(which vault))` if you want the safer option.
 
-```bash
-sudo mkdir -p /etc/vault.d
-sudo chown -R vault:vault /etc/vault.d
-```
+
 
 ---
 
